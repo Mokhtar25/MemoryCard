@@ -5,7 +5,7 @@ export default function App() {
   const [value, setValue] = useState("");
   const [url, setUrl] = useState("");
 
-  const handelchange = (text: any) => {
+  const handelchange = (text: React.ChangeEvent<HTMLInputElement>) => {
     setValue(text.target.value);
   };
   useEffect(() => {
@@ -16,6 +16,8 @@ export default function App() {
     if (!value) return;
     const data = await getpic(value);
     if (data.meta.status === 429) return;
+    const meta = data.meta.status;
+    if (meta[0] !== 2) return;
     setUrl(data.data.images.original.url);
   }
 
