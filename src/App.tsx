@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getpic } from "./utils/utils";
 
 export default function App() {
@@ -8,10 +8,14 @@ export default function App() {
   const handelchange = (text: any) => {
     setValue(text.target.value);
   };
+  useEffect(() => {
+    get();
+  }, []);
 
   async function get() {
+    if (!value) return;
     const data = await getpic(value);
-    console.log(data);
+    if (data.meta.status === 429) return;
     setUrl(data.data.images.original.url);
   }
 
