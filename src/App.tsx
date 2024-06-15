@@ -15,10 +15,7 @@ export default function App() {
   async function get() {
     if (!value) return;
     const data = await getpic(value);
-    if (data.meta.status === 429) return;
-    const meta = data.meta.status;
-    if (meta[0] !== 2) return;
-    setUrl(data.data.images.original.url);
+    setUrl(data);
   }
 
   return (
