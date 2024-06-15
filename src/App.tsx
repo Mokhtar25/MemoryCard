@@ -19,11 +19,12 @@ export default function App() {
   }
 
   return (
-    <div className="h-screen w-full bg-slate-100">
-      <button className="size-24 bg-red-500" onClick={get}>
+    <div className="h-screen w-full bg-slate-100 p-4">
+      <button className="size-24 bg-red-500 " onClick={get}>
         click for new pic
       </button>
       <input
+        className="outline-black border-2 border-red-50"
         type="text"
         name=""
         value={value}
