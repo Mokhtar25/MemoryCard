@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 export interface Card {
   name: string;
   url: string;
-  id: number;
+  id: string;
 }
 export default async function getpic(item: string) {
   if (!item) return false;
