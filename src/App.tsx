@@ -5,16 +5,18 @@ import { Card } from "./utils/utils";
 
 export default function App() {
   const [cards, setCards] = useState<Card[]>();
+  const [load, setLoad] = useState("");
 
   // useEffect(() => {
   //   makeInit();
   // }, []);
 
-  async function getUrl() {
-    const data = await getpic(value);
-    if (!data) return;
-    setUrl(data);
-  }
+  if (!cards)
+    setTimeout(() => {
+      if (load === "loading.") setLoad("loading..");
+      else setLoad("loading.");
+    }, 500);
+
   async function makeInit() {
     const data = await makeUrls(chars);
     setCards(data);
@@ -23,6 +25,7 @@ export default function App() {
   return (
     <div className="h-screen w-full bg-slate-100 p-4">
       {cards?.map((e) => <img src={e.url} alt={e.name} key={e.id} />)}
+      {!cards && <h1>{load} </h1>}
     </div>
   );
 }

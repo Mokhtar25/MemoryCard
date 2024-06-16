@@ -13,6 +13,7 @@ export default async function getpic(item: string) {
 
   if (data.meta.status === 219) return false;
   if (data.meta.status === 405) return false;
+  if (data.meta.status === 429) return false;
 
   return data.data.images.original.url;
 }
@@ -22,6 +23,7 @@ export async function makeUrls(chars: string[]) {
 
   for (const item of chars) {
     let url = await getpic(item);
+    if (!url) url = "";
     let id = uuidv4();
     const card = { name: item, url: url, id: id };
     charsUrls.push(card);
