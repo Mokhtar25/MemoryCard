@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-interface Card {
+export interface Card {
   name: string;
   url: string;
   id: number;
@@ -26,4 +26,5 @@ export async function makeUrls(chars: string[]) {
     const card = { name: item, url: url, id: id };
     charsUrls.push(card);
   }
+  return charsUrls;
 }

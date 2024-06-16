@@ -10,7 +10,3 @@ export const chars = [
   "Winston Bishop new girl",
   "Jessica Day",
 ];
-
-for (const item of chars) {
-  console.log(item);
-}
