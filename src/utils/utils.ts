@@ -30,3 +30,13 @@ export async function makeUrls(chars: string[]) {
   }
   return charsUrls;
 }
+
+const getRandom = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+export function RandomizeArray(oldArray: Card[]) {
+  let cardsTmp = [...oldArray];
+  cardsTmp.sort((a) => (a.id.includes(`${getRandom(0, 99)}`) ? 1 : -1));
+  return cardsTmp;
+}

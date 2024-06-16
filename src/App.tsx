@@ -4,10 +4,7 @@ import { chars } from "./default";
 import { Card } from "./utils/utils";
 import { PicCard } from "./comp/PicCard";
 import { urls } from "./default";
-
-const getRandom = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
+import { RandomizeArray } from "./utils/utils";
 
 export default function App() {
   const [cards, setCards] = useState<Card[]>(urls);
@@ -18,10 +15,8 @@ export default function App() {
   // }, []);
 
   const handelClick = () => {
-    let cardsTmp = [...cards];
-    cardsTmp.sort((a) => (a.id.includes(`${getRandom(0, 99)}`) ? 1 : -1));
-
-    setCards(cardsTmp);
+    const newArray = RandomizeArray(cards);
+    setCards(newArray);
   };
 
   if (!cards)
