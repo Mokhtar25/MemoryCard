@@ -3,6 +3,7 @@ export interface Card {
   name: string;
   url: string;
   id: string;
+  clicked: Boolean;
 }
 export default async function getpic(item: string) {
   if (!item) return false;
@@ -25,7 +26,7 @@ export async function makeUrls(chars: string[]) {
     let url = await getpic(item);
     if (!url) url = "";
     let id = uuidv4();
-    const card = { name: item, url: url, id: id };
+    const card = { name: item, url: url, id: id, clicked: false };
     charsUrls.push(card);
   }
   return charsUrls;
