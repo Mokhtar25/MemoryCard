@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { getpic } from "./utils/utils";
+import getpic, { makeUrls } from "./utils/utils";
+import { chars } from "./default";
 
 export default function App() {
   const [value, setValue] = useState("");
   const [url, setUrl] = useState("");
+  const [cards, setCards] = useState<any>("");
 
   const handelchange = (text: React.ChangeEvent<HTMLInputElement>) => {
     setValue(text.target.value);
   };
   useEffect(() => {
-    get();
+    setCards(make());
   }, []);
 
   async function get() {
-    if (!value) return;
     const data = await getpic(value);
+    if (!data) return;
     setUrl(data);
+  }
+  async function make() {
+    const data = await makeUrls(chars);
+    return data;
   }
 
   return (
