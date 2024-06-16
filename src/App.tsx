@@ -7,16 +7,34 @@ import { urls } from "./default";
 import { RandomizeArray } from "./utils/utils";
 
 export default function App() {
-  const [cards, setCards] = useState<Card[]>(urls);
+  // edit later
+  const [cards, setCards] = useState<any>(urls);
   const [load, setLoad] = useState("");
+  const [currentScore, setCurrentScore] = useState(0);
+  const [heighScore, setHighScore] = useState(0);
 
   // useEffect(() => {
   //   makeInit();
   // }, []);
 
-  const handelClick = () => {
-    const newArray = RandomizeArray(cards);
+  const handelClick = (elemnt: Card) => {
+    const index = cards.indexOf(elemnt);
+
+    const tmp = [...cards];
+    if (tmp[index].clicked === true) {
+      if (currentScore > heighScore) setHighScore(() => currentScore);
+      setCurrentScore(0);
+      setCards(urls);
+      alert("lost");
+      return;
+    }
+    setCurrentScore(currentScore + 1);
+
+    tmp[index] = { ...tmp[index], clicked: true };
+
+    const newArray = RandomizeArray(tmp);
     setCards(newArray);
+    console.log(newArray);
   };
 
   if (!cards)
@@ -31,9 +49,17 @@ export default function App() {
   }
 
   return (
-    <div className="h-screen w-full bg-slate-100 p-4 flex flex-wrap items-center justify-center">
-      {cards?.map((e) => <PicCard onClick={handelClick} card={e} key={e.id} />)}
-      {!cards && <h1>{load} </h1>}
-    </div>
+    <>
+      <span>
+        heighScore {heighScore}, currentScore {currentScore}
+      </span>
+      <div className="h-screen w-full bg-slate-100 p-4 flex flex-wrap items-center justify-center">
+        {cards?.map((e: Card) => (
+          <PicCard onClick={() => handelClick(e)} card={e} key={e.id} />
+        ))}
+
+        {!cards && <h1>{load} </h1>}
+      </div>
+    </>
   );
 }
