@@ -29,6 +29,11 @@ export default function App() {
       return;
     }
     setCurrentScore(currentScore + 1);
+    if (currentScore + 1 === 8) {
+      alert("win");
+      setCurrentScore(0);
+      return;
+    }
 
     tmp[index] = { ...tmp[index], clicked: true };
 
