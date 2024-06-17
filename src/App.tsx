@@ -64,10 +64,11 @@ export default function App() {
   return (
     <div className="flex h-screen flex-col justify-between">
       <Header />
-      <div className="flex-grow bg-fuchsia-300">
-        <span>
-          heighScore {heighScore}, currentScore {currentScore}
-        </span>
+      <div className="flex-grow bg-purple-100">
+        <div className="flex justify-between px-4 py-2 text-xl">
+          <span> Current Score : {currentScore}</span>
+          <span className=""> {heighScore} : Heighest Score </span>
+        </div>
         <div className="flex flex-wrap items-center justify-center">
           {cards?.map((e: Card) => (
             <PicCard onClick={() => handelClick(e)} card={e} key={e.id} />
