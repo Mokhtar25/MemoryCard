@@ -88,7 +88,7 @@ export default function App() {
       <div className="flex-grow">
         <div className="flex justify-between px-4 pt-1 text-xl">
           <span> Current Score : {currentScore}</span>
-          <span> {heighScore} : Heighest Score </span>
+          <span> {heighScore} : Highest Score </span>
         </div>
         <div className={"flex flex-wrap items-center justify-center py-2"}>
           {cards?.map((e: Card) => (
