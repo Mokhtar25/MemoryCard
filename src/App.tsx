@@ -62,13 +62,14 @@ export default function App() {
 
   async function makeInit() {
     try {
+      throw new Error("Api error");
+      // edit to fetch new pictures
       const data = await makeUrls(chars);
       setCards(data);
       setOrginal(data);
     } catch (e) {
       setOrginal(urls);
       setCards(urls);
-      console.log(e, "eeeeee");
     }
   }
 

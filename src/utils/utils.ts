@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { ApiKey } from "../vite-env";
 export interface Card {
   name: string;
   url: string;
@@ -8,7 +9,7 @@ export interface Card {
 export default async function getpic(item: string) {
   if (!item) return false;
   const url = await fetch(
-    `https://api.giphy.com/v1/gifs/translate?api_key=kkCXhdyH1AhoMqccfB9w5xHSbTXhIaOQ&s=${item}`,
+    `https://api.giphy.com/v1/gifs/translate?api_key=${ApiKey}&s=${item}`,
   );
   const data = await url.json();
 
