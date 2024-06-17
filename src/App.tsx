@@ -15,6 +15,7 @@ export default function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [heighScore, setHighScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [win, setWin] = useState(false);
 
   // useEffect(() => {
   //   makeInit();
@@ -37,7 +38,10 @@ export default function App() {
     }
     setCurrentScore(currentScore + 1);
     if (currentScore + 1 === 8) {
-      alert("win");
+      setWin(true);
+      setTimeout(() => {
+        setWin(false);
+      }, 500);
       setCurrentScore(0);
       setHighScore(currentScore + 1);
       return;
@@ -70,7 +74,8 @@ export default function App() {
     <div
       className={
         "flex h-screen flex-col justify-between " +
-        (gameOver ? "bg-red-600" : "bg-purple-100")
+        (gameOver ? "bg-red-600" : "bg-purple-100") +
+        (win ? " bg-lime-400" : "")
       }
     >
       <Header />
