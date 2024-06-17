@@ -1,4 +1,4 @@
-import getpic, { Card } from "./utils/utils";
+import { Card } from "./utils/utils";
 
 export const chars = [
   "Nick Miller, New girl",
