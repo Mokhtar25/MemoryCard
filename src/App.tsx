@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import getpic, { makeUrls } from "./utils/utils";
+import { useEffect, useState } from "react";
+import { makeUrls } from "./utils/utils";
 import { chars } from "./default";
 import { Card } from "./utils/utils";
 import { PicCard } from "./comp/PicCard";
@@ -10,16 +10,17 @@ import { Footer } from "./comp/Footer";
 
 export default function App() {
   // correct type and you can instizle useState with a funtion that you just call once
-  const [cards, setCards] = useState<Card[]>(urls);
+  const [orginal, setOrginal] = useState<Card[]>([]);
+  const [cards, setCards] = useState<Card[]>([]);
   const [load, setLoad] = useState("");
   const [currentScore, setCurrentScore] = useState(0);
   const [heighScore, setHighScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [win, setWin] = useState(false);
 
-  // useEffect(() => {
-  //   makeInit();
-  // }, []);
+  useEffect(() => {
+    makeInit();
+  }, []);
 
   const handelClick = (elemnt: Card) => {
     const index = cards.indexOf(elemnt);
@@ -32,7 +33,7 @@ export default function App() {
       setTimeout(() => {
         setGameOver(false);
       }, 500);
-      setCards(urls);
+      setCards(orginal);
 
       return;
     }
@@ -51,23 +52,24 @@ export default function App() {
 
     const newArray = RandomizeArray(tmp);
     setCards(newArray);
-    console.log(newArray);
   };
 
-  if (!cards)
+  if (cards.length === 0)
     setTimeout(() => {
       if (load === "loading.") setLoad("loading..");
       else setLoad("loading.");
     }, 500);
 
   async function makeInit() {
-    const data = await makeUrls(chars);
-    if (data[0].url === "") {
+    try {
+      const data = await makeUrls(chars);
+      setCards(data);
+      setOrginal(data);
+    } catch (e) {
+      setOrginal(urls);
       setCards(urls);
-      return;
+      console.log(e, "eeeeee");
     }
-    console.log(data);
-    setCards(data);
   }
 
   return (
@@ -89,7 +91,9 @@ export default function App() {
             <PicCard onClick={() => handelClick(e)} card={e} key={e.id} />
           ))}
 
-          {!cards && <h1>{load} </h1>}
+          {cards.length === 0 && (
+            <h1 className="z-50 text-2xl text-black">{load} </h1>
+          )}
         </div>
       </div>
 
