@@ -6,3 +6,12 @@
   transition: ease-in-out 150ms;
   transition-property: transform;
 }
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

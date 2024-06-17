@@ -76,7 +76,7 @@ export default function App() {
   return (
     <div
       className={
-        "box-border flex min-h-screen flex-col justify-between border-2 border-blue-500 " +
+        "flex min-h-screen flex-col justify-between " +
         (!gameOver && !win
           ? " bg-purple-100"
           : gameOver
