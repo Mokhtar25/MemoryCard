@@ -10,14 +10,15 @@ import { Footer } from "./comp/Footer";
 
 export default function App() {
   // correct type and you can instizle useState with a funtion that you just call once
-  const [cards, setCards] = useState<any>();
+  const [cards, setCards] = useState<Card[]>(urls);
   const [load, setLoad] = useState("");
   const [currentScore, setCurrentScore] = useState(0);
   const [heighScore, setHighScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
-  useEffect(() => {
-    makeInit();
-  }, []);
+  // useEffect(() => {
+  //   makeInit();
+  // }, []);
 
   const handelClick = (elemnt: Card) => {
     const index = cards.indexOf(elemnt);
@@ -26,8 +27,12 @@ export default function App() {
     if (tmp[index].clicked === true) {
       if (currentScore > heighScore) setHighScore(() => currentScore);
       setCurrentScore(0);
+      setGameOver(true);
+      setTimeout(() => {
+        setGameOver(false);
+      }, 500);
       setCards(urls);
-      alert("lost");
+
       return;
     }
     setCurrentScore(currentScore + 1);
@@ -55,21 +60,26 @@ export default function App() {
     const data = await makeUrls(chars);
     if (data[0].url === "") {
       setCards(urls);
-      console.log("fs");
       return;
     }
+    console.log(data);
     setCards(data);
   }
 
   return (
-    <div className="flex h-screen flex-col justify-between">
+    <div
+      className={
+        "flex h-screen flex-col justify-between " +
+        (gameOver ? "bg-red-600" : "bg-purple-100")
+      }
+    >
       <Header />
-      <div className="flex-grow bg-purple-100">
+      <div className="flex-grow">
         <div className="flex justify-between px-4 py-2 text-xl">
           <span> Current Score : {currentScore}</span>
           <span className=""> {heighScore} : Heighest Score </span>
         </div>
-        <div className="flex flex-wrap items-center justify-center">
+        <div className={"flex flex-wrap items-center justify-center"}>
           {cards?.map((e: Card) => (
             <PicCard onClick={() => handelClick(e)} card={e} key={e.id} />
           ))}
