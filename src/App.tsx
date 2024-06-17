@@ -76,18 +76,21 @@ export default function App() {
   return (
     <div
       className={
-        "flex h-screen flex-col justify-between " +
-        (gameOver ? "bg-red-600" : "bg-purple-100") +
-        (win ? " bg-lime-400" : "")
+        "box-border flex min-h-screen flex-col justify-between border-2 border-blue-500 " +
+        (!gameOver && !win
+          ? " bg-purple-100"
+          : gameOver
+            ? " bg-red-600"
+            : " bg-lime-400")
       }
     >
       <Header />
       <div className="flex-grow">
-        <div className="flex justify-between px-4 py-2 text-xl">
+        <div className="flex justify-between px-4 pt-1 text-xl">
           <span> Current Score : {currentScore}</span>
-          <span className=""> {heighScore} : Heighest Score </span>
+          <span> {heighScore} : Heighest Score </span>
         </div>
-        <div className={"flex flex-wrap items-center justify-center"}>
+        <div className={"flex flex-wrap items-center justify-center py-2"}>
           {cards?.map((e: Card) => (
             <PicCard onClick={() => handelClick(e)} card={e} key={e.id} />
           ))}
@@ -97,7 +100,6 @@ export default function App() {
           )}
         </div>
       </div>
-
       <Footer />
     </div>
   );
