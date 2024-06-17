@@ -5,17 +5,19 @@ import { Card } from "./utils/utils";
 import { PicCard } from "./comp/PicCard";
 import { urls } from "./default";
 import { RandomizeArray } from "./utils/utils";
+import { Header } from "./comp/Header";
+import { Footer } from "./comp/Footer";
 
 export default function App() {
-  // edit later
-  const [cards, setCards] = useState<any>(urls);
+  // correct type and you can instizle useState with a funtion that you just call once
+  const [cards, setCards] = useState<any>();
   const [load, setLoad] = useState("");
   const [currentScore, setCurrentScore] = useState(0);
   const [heighScore, setHighScore] = useState(0);
 
-  // useEffect(() => {
-  //   makeInit();
-  // }, []);
+  useEffect(() => {
+    makeInit();
+  }, []);
 
   const handelClick = (elemnt: Card) => {
     const index = cards.indexOf(elemnt);
@@ -32,6 +34,7 @@ export default function App() {
     if (currentScore + 1 === 8) {
       alert("win");
       setCurrentScore(0);
+      setHighScore(currentScore + 1);
       return;
     }
 
@@ -50,21 +53,31 @@ export default function App() {
 
   async function makeInit() {
     const data = await makeUrls(chars);
+    if (data[0].url === "") {
+      setCards(urls);
+      console.log("fs");
+      return;
+    }
     setCards(data);
   }
 
   return (
-    <>
-      <span>
-        heighScore {heighScore}, currentScore {currentScore}
-      </span>
-      <div className="h-screen w-full bg-slate-100 p-4 flex flex-wrap items-center justify-center">
-        {cards?.map((e: Card) => (
-          <PicCard onClick={() => handelClick(e)} card={e} key={e.id} />
-        ))}
+    <div className="flex h-screen flex-col justify-between">
+      <Header />
+      <div className="flex-grow bg-fuchsia-300">
+        <span>
+          heighScore {heighScore}, currentScore {currentScore}
+        </span>
+        <div className="flex flex-wrap items-center justify-center">
+          {cards?.map((e: Card) => (
+            <PicCard onClick={() => handelClick(e)} card={e} key={e.id} />
+          ))}
 
-        {!cards && <h1>{load} </h1>}
+          {!cards && <h1>{load} </h1>}
+        </div>
       </div>
-    </>
+
+      <Footer />
+    </div>
   );
 }

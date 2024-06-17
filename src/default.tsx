@@ -1,14 +1,14 @@
 import getpic, { Card } from "./utils/utils";
 
 export const chars = [
-  "Nick Miller",
-  "Schmidt new girl",
-  "jacke paralta",
-  "Ross from Friends",
-  "Ron parks and recs",
-  "Barny stensions himym",
-  "Winston Bishop new girl",
-  "Jessica Day",
+  "Nick Miller, New girl",
+  "Schmidt, new girl",
+  "jake peralta, B99",
+  "Ross ,Friends",
+  "Ron ,parks and recs",
+  "barney stinson, himym",
+  "Winston Bishop, new girl",
+  "Jessica Day, New girl",
 ];
 
 export const urls = [
