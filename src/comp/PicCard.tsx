@@ -9,7 +9,7 @@ type Props = {
 export const PicCard: FC<Props> = ({ card, onClick }) => {
   return (
     <div
-      className="flex size-80 cursor-pointer flex-col items-center justify-center gap-14 rounded-s border-2 border-white bg-indigo-800 p-4 hover:z-50 hover:scale-110 active:scale-90"
+      className="flex size-80 cursor-pointer select-none flex-col items-center justify-center gap-14 rounded-s border-2 border-white bg-indigo-800 p-4 hover:z-50 hover:scale-110 active:scale-90"
       onClick={onClick}
     >
       <img

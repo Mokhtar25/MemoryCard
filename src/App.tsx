@@ -86,7 +86,7 @@ export default function App() {
     >
       <Header />
       <div className="flex-grow">
-        <div className="flex justify-between px-4 pt-1 text-xl">
+        <div className="flex select-none justify-between px-4 pt-1 text-xl">
           <span> Current Score : {currentScore}</span>
           <span> {heighScore} : Highest Score </span>
         </div>
