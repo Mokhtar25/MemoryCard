@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { makeUrls } from "./utils/utils";
 import { chars } from "./default";
 import { Card } from "./utils/utils";
